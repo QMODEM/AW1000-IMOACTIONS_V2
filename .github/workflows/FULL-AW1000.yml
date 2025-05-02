@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
 
 env:
-  REPO_URL: https://github.com/intannajwa/immortalwrt.git
+  REPO_URL: https://github.com/immortalwrt/immortalwrt.git
   REPO_BRANCH: openwrt-24.10
   FEEDS_CONF: config/immortalwrt-openwrt-24.10/feeds.conf.default
   CONFIG_FILE: config/immortalwrt-openwrt-24.10/.config
@@ -69,11 +69,12 @@ jobs:
         run: cd openwrt/ && ./scripts/feeds install -a
 
 
-      - name: GET Custom Luci App - moder
+      - name: GET Custom Settings
         run: |
-          chmod +x ${PATH_SCRIPT_03}
           cd openwrt/
-          ${GITHUB_WORKSPACE}/${PATH_SCRIPT_03}
+          mkdir files
+          cd files
+          git clone https://github.com/intannajwa/etc.git
           
       - name: Load custom configuration
         run: |
